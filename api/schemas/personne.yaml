@@ -1,0 +1,6 @@
+Personne:
+  description: |
+    Représentation d'une personne
+  properties:
+    nom:
+      type: string

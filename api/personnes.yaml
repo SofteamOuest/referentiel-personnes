@@ -1,0 +1,39 @@
+openapi: 3.0.0
+info:
+  title: referentiel-personnes
+  description: API du référentiel des personnes
+  version: 1.0.0
+paths:
+  /personnes:
+    get:
+      summary: Récuperer personnes
+      description: Retourne toutes les personnes du référentiel
+      operationId: getPersonnes
+      responses:
+        200:
+          description: Une liste de personnes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: schemas/personne.yaml
+  /personnes/{id}:
+    get:
+      summary: Récuperer personne
+      description: Recherche une personne via son identifiant.
+      operationId: getPersonneById
+      parameters:
+      - name: id
+        in: path
+        description: Identifiant de la personne
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: La personne trouvé
+          content:
+            application/json:
+              schema:
+                $ref: schemas/personne.yaml
