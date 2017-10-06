@@ -1,0 +1,6 @@
+logging.level:
+  com.softeam.referentielpersonnes.back: INFO
+
+spring:
+  application:
+    name: REFERENTIEL-PERSONNES-BACK
