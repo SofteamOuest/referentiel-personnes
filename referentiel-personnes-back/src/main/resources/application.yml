@@ -1,6 +1,9 @@
 logging.level:
   com.softeam.referentielpersonnes.back: INFO
 
+server:
+  port: 8080
+
 spring:
   application:
     name: REFERENTIEL-PERSONNES-BACK
