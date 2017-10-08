@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat
 podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
         // le slave jenkins
-        containerTemplate(name: 'jnlp', image: 'jenkinsci/jnlp-slave:alpine'),
+        containerTemplate(name: 'jnlp', image: 'jenkinsci/jnlp-slave:3.7-1-alpine'),
 
         // un conteneur pour le build maven
         containerTemplate(name: 'gradle', image: 'gradle:4.2-jdk8', ttyEnabled: true, command: 'cat'),
