@@ -33,16 +33,16 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
             stage 'push' {
 
-                sh 'mkdir /etc/docker'
+                //sh 'mkdir /etc/docker'
 
                 // le registry est insecure (pas de https)
-                sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
+                //sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
 
-                sh 'docker login -u admin -p softeam44 registry.wildwidewest.xyz'
+                //sh 'docker login -u admin -p softeam44 registry.wildwidewest.xyz'
 
-                sh 'docker build . -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
+                //sh 'docker build . -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
 
-                sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
+                //sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
             }
         }
 
