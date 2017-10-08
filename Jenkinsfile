@@ -24,30 +24,31 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
         container('gradle') {
 
-            stage 'build'
-
-            sh 'cd referentiel-personnes-back; gradle clean install'
+            stage 'build' {
+                sh 'cd referentiel-personnes-back; gradle clean install'
+            }
         }
 
         container('docker') {
 
-            stage 'push'
+            stage 'push' {
 
-            sh 'mkdir /etc/docker'
+                sh 'mkdir /etc/docker'
 
-            // le registry est insecure (pas de https)
-            sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
+                // le registry est insecure (pas de https)
+                sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
 
-            sh 'docker login -u admin -p softeam44 registry.wildwidewest.xyz'
+                sh 'docker login -u admin -p softeam44 registry.wildwidewest.xyz'
 
-            sh 'docker build . -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
+                sh 'docker build . -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
 
-            sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
+                sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
+            }
         }
 
         container('kubectl') {
 
-            stage 'deploy'
+            stage 'deploy' {}
 
             // déploiement de la base de données
             //sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/postgresql.yml'
