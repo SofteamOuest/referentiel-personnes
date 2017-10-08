@@ -25,16 +25,16 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
         // checkout des sources
         git url: 'https://github.com/SofteamOuest/referentiel-personnes-api.git'
 
-        /* container('gradle') {
+        container('gradle') {
 
-            stage 'build' {
+
                 sh 'cd referentiel-personnes-back;'
-            }
-        } */
+
+        }
 
         container('docker') {
 
-            stage 'push' {
+
 
                 sh 'mkdir /etc/docker'
 
@@ -46,12 +46,9 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
                 sh 'docker build . -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
 
                 sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
-            }
         }
 
         container('kubectl') {
-
-            stage 'deploy' {}
 
             // déploiement de la base de données
             //sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/postgresql.yml'
