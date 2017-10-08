@@ -6,10 +6,13 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
         // le slave jenkins
         containerTemplate(name: 'jnlp', image: 'jenkinsci/jnlp-slave:alpine'),
+
         // un conteneur pour le build maven
         containerTemplate(name: 'gradle', image: 'gradle:4.2-jdk8', ttyEnabled: true, command: 'cat'),
+
         // un conteneur pour construire les images docker
         containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
+
         // un conteneur pour déployer les services kubernetes
         containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl', command: 'cat', ttyEnabled: true)],
 
@@ -33,16 +36,16 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
             stage 'push' {
 
-                //sh 'mkdir /etc/docker'
+                sh 'mkdir /etc/docker'
 
                 // le registry est insecure (pas de https)
-                //sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
+                sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
 
-                //sh 'docker login -u admin -p softeam44 registry.wildwidewest.xyz'
+                sh 'docker login -u admin -p softeam44 registry.wildwidewest.xyz'
 
-                //sh 'docker build . -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
+                sh 'docker build . -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
 
-                //sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
+                sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
             }
         }
 
