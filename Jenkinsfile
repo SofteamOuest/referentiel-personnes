@@ -24,7 +24,7 @@ podTemplate(label: 'helloworld-build-pod', nodeSelector: 'medium', containers: [
 
         container('gradle') {
 
-            sh 'gradle clean install'
+            sh 'cd referentiel-personnes-back; gradle clean install'
         }
 
         container('docker') {
