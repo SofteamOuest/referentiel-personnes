@@ -2,7 +2,7 @@
 import java.text.SimpleDateFormat
 
 // pod utilisé pour la compilation du projet
-podTemplate(label: 'helloworld-build-pod', nodeSelector: 'medium', containers: [
+podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
         // le slave jenkins
         containerTemplate(name: 'jnlp', image: 'jenkinsci/jnlp-slave:alpine'),
@@ -17,17 +17,21 @@ podTemplate(label: 'helloworld-build-pod', nodeSelector: 'medium', containers: [
         volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
 ) {
 
-    node('helloworld-build-pod') {
+    node('meltingpoc-build-pod') {
 
         // checkout des sources
         git url: 'https://github.com/SofteamOuest/referentiel-personnes-api.git'
 
         container('gradle') {
 
+            stage 'build'
+
             sh 'cd referentiel-personnes-back; gradle clean install'
         }
 
         container('docker') {
+
+            stage 'push'
 
             sh 'mkdir /etc/docker'
 
@@ -36,18 +40,20 @@ podTemplate(label: 'helloworld-build-pod', nodeSelector: 'medium', containers: [
 
             sh 'docker login -u admin -p softeam44 registry.wildwidewest.xyz'
 
-            sh 'docker build . -t registry.wildwidewest.xyz/repository/docker-repository/pocs/helloworld'
+            sh 'docker build . -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
 
-            sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/helloworld'
+            sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
         }
 
         container('kubectl') {
+
+            stage 'deploy'
 
             // déploiement de la base de données
             //sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/postgresql.yml'
 
             // déploiement du service
-            //sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/helloworld.yml'
+            //sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/meltingpoc.yml'
         }
     }
 }
