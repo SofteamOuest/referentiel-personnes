@@ -7,7 +7,7 @@ podTemplate(label: 'helloworld-build-pod', nodeSelector: 'medium', containers: [
         // le slave jenkins
         containerTemplate(name: 'jnlp', image: 'jenkinsci/jnlp-slave:alpine'),
         // un conteneur pour le build maven
-        containerTemplate(name: 'gradle', image: 'maven:4.2-jdk8', ttyEnabled: true, command: 'cat'),
+        containerTemplate(name: 'gradle', image: 'gradle:4.2-jdk8', ttyEnabled: true, command: 'cat'),
         // un conteneur pour construire les images docker
         containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
         // un conteneur pour déployer les services kubernetes
