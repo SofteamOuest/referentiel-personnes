@@ -32,9 +32,9 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
                 }
         }
 
-        container('build docker image') {
+        container('docker') {
 
-                stage('docker'){
+                stage('build docker image'){
                     environment {
                         NEXUS_PWD = credentials('nexus_password')
                     }
