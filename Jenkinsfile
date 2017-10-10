@@ -48,11 +48,8 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
         container('kubectl') {
 
-            // déploiement de la base de données
-            //sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/postgresql.yml'
 
-            // déploiement du service
-            //sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/meltingpoc.yml'
+            sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f kubernetes/meltingpoc.yml'
         }
     }
 }
