@@ -41,8 +41,6 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
                 sh 'docker login -u admin -p softeam44 registry.wildwidewest.xyz'
 
-                sh 'docker build . -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
-
                 sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
         }
 
