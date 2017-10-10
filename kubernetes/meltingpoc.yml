@@ -18,7 +18,7 @@ spec:
       - name: meltingpoc-mongo
         image: mongo:3.5.13
         ports:
-        - containerPort: 80
+        - containerPort: 27017
       - name: meltingpoc-server
         image: registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc
         ports:
@@ -34,7 +34,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 8080
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress

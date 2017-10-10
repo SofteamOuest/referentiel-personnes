@@ -22,6 +22,10 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
     node('meltingpoc-build-pod') {
 
+        environment {
+            NEXUS_PWD = credentials('nexus_password')
+        }
+
         // checkout des sources
         git url: 'https://github.com/SofteamOuest/referentiel-personnes-api.git'
 
@@ -35,9 +39,7 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
         container('docker') {
 
                 stage('build docker image'){
-                    environment {
-                        NEXUS_PWD = credentials('nexus_password')
-                    }
+
 
                     sh 'cd referentiel-personnes-back; docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc .'
 
@@ -54,6 +56,9 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
         container('kubectl') {
 
+            sh 'kubectl delete ing meltingpoc --namespace=development'
+            sh 'kubectl delete svc meltingpoc --namespace=development'
+            sh 'kubectl delete deployment meltingpoc --namespace=development'
             sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f kubernetes/meltingpoc.yml'
         }
     }
