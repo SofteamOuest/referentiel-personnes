@@ -31,7 +31,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-data-mongodb"
     compile "com.github.beyondeye.graphkool:$graphkool_version"
-    compile "org.jongo":$jongo_version
+    compile "org.jongo:$jongo_version"
 }
 
 compileKotlin {
