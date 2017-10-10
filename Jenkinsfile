@@ -32,24 +32,25 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
         container('docker') {
 
-                environment {
-                    NEXUS_PWD = credentials('nexus_password')
+                stage('docker'){
+                    environment {
+                        NEXUS_PWD = credentials('nexus_password')
+                    }
+
+                    sh 'cd referentiel-personnes-back; docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc .'
+
+                    sh 'mkdir /etc/docker'
+
+                    // le registry est insecure (pas de https)
+                    sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
+
+                    sh 'docker login -u admin -p ${NEXUS_PWD} registry.wildwidewest.xyz'
+
+                    sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
                 }
-
-                sh 'cd referentiel-personnes-back; docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc .'
-
-                sh 'mkdir /etc/docker'
-
-                // le registry est insecure (pas de https)
-                sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
-
-                sh 'docker login -u admin -p ${NEXUS_PWD} registry.wildwidewest.xyz'
-
-                sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
         }
 
         container('kubectl') {
-
 
             sh 'kubectl --namespace=meltingpoc --server=http://92.222.81.117:8080 apply -f kubernetes/meltingpoc.yml'
         }
