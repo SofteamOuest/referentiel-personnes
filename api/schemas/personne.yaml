@@ -2,5 +2,29 @@ Personne:
   description: |
     Représentation d'une personne
   properties:
+    id:
+      type: integer
+      format: int32
     nom:
       type: string
+    prenom:
+      type: string
+    date_de_naissance:
+      type: string
+    photo:
+      type: string
+      description: Url de la photo
+    mail_pro:
+      type: string
+    mail_perso:
+      type: string
+    tel_pro:
+      type: string
+    tel_perso:
+      type: string
+    poste:
+      type: string
+    description_libre:
+      type: string
+
+
