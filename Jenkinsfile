@@ -27,10 +27,12 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
         container('gradle') {
 
-                sh 'cd referentiel-personnes-back; gradle clean install'
+                stage('build sources'){
+                    sh 'cd referentiel-personnes-back; gradle clean install'
+                }
         }
 
-        container('docker') {
+        container('build docker image') {
 
                 stage('docker'){
                     environment {
