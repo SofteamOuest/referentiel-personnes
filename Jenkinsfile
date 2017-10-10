@@ -28,6 +28,8 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
         container('gradle') {
 
                 sh 'cd referentiel-personnes-back; gradle clean install'
+
+                sh 'cd referentiel-personnes-back; docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc .'
         }
 
         container('docker') {
