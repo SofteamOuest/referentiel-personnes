@@ -19,7 +19,7 @@ class PersonnesQueryResource @Autowired constructor(
             method = arrayOf(RequestMethod.GET),
             produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
     private fun get(@PathVariable id: String): Personne? {
-        logger.debug("Getting Personne #" + id)
+        logger.debug("Getting Personne #$id")
         return personnesQueryService.get(id)
     }
 
@@ -29,9 +29,9 @@ class PersonnesQueryResource @Autowired constructor(
             produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
     @ResponseBody
     private fun list(pageable: Pageable): Iterable<Personne> {
-        logger.debug("Getting all Personnes, " + pageable.toString())
+        logger.debug("Getting all Personnes, $pageable.toString()")
         val list = personnesQueryService.list(pageable)
-        logger.debug("List of Personnes " + list.content.toString())
+        logger.debug("List of Personnes $list.content.toString()")
         return list.content
     }
 

@@ -19,7 +19,7 @@ class PersonnesCommandResource @Autowired constructor(
             consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE),
             produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
     private fun create(@RequestBody personne: Personne): Personne {
-        logger.info("Received data for new " + personne.toString())
+        logger.info("Received data for new $personne.toString()")
         return personnesCommandService.create(personne)
     }
 
@@ -29,7 +29,7 @@ class PersonnesCommandResource @Autowired constructor(
             consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE),
             produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
     private fun update(@RequestBody personne: Personne): Personne {
-        logger.info("Received data for updating " + personne.toString())
+        logger.info("Received data for updating $personne.toString()")
         return personnesCommandService.update(personne)
     }
 
@@ -38,7 +38,7 @@ class PersonnesCommandResource @Autowired constructor(
             method = arrayOf(RequestMethod.DELETE),
             produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
     private fun delete(@PathVariable id: String) {
-        logger.info("Deleting Personne #" + id)
+        logger.info("Deleting Personne #$id")
         personnesCommandService.delete(id)
     }
 
