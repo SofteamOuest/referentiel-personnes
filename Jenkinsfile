@@ -56,10 +56,14 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
         container('kubectl') {
 
-            sh 'kubectl delete ing meltingpoc --namespace=development'
-            sh 'kubectl delete svc meltingpoc --namespace=development'
-            sh 'kubectl delete deployment meltingpoc --namespace=development'
-            sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f kubernetes/meltingpoc.yml'
+            stage('deploy'){
+
+                sh 'kubectl --namespace=development delete ing meltingpoc'
+                sh 'kubectl --namespace=development delete svc meltingpoc'
+                sh 'kubectl --namespace=development delete deployment meltingpoc '
+                sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f kubernetes/meltingpoc.yml'
+
+            }
         }
     }
 }
