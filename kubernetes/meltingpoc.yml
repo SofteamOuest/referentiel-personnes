@@ -18,6 +18,8 @@ spec:
         image: registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc
         ports:
         - containerPort: 8080
+      imagePullSecrets:
+      - name: regsecret
 ---
 kind: Service
 apiVersion: v1
