@@ -9,3 +9,15 @@ Spécifications de [Swagger OpenApi](https://swagger.io/specification/) et [exam
 Outils:
 - [Swagger editor](https://editor.swagger.io//#/) 
 
+- [Swagger-ui](https://github.com/swagger-api/swagger-ui)
+
+Pour faciliter le développement, Swagger-ui a été intégré au projet.
+Pour l'utiliser il faut:
+- avoir Apache ou nginx
+- créer un virtualhost sur le répertoire "api"
+
+Swagger-ui est accessible depuis l'url:
+http://localhost:port_virtual_host/swagger-ui/
+
+Ouvrir l'api http://localhost:85/personnes.yaml
+
