@@ -7,3 +7,5 @@ WORKDIR /apps/referentiel-personnes-api
 ADD build/libs/referentiel-personnes-api.jar /apps/referentiel-personnes-api
 
 EXPOSE 8080
+
+CMD java -jar referentiel-personnes-api.jar
