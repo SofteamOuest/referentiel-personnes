@@ -47,6 +47,8 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
                 stage('build docker image'){
 
 
+                    sh 'ls -la referentiel-personnes-back/build/libs'
+
                     sh 'cd referentiel-personnes-back; docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc .'
 
                     sh 'mkdir /etc/docker'
