@@ -49,8 +49,9 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
                     // le registry est insecure (pas de https)
                     sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
 
-                    withCredentials([string(credentialsId: 'nexus_password', variable: '$NEXUS_PWD')]) {
+                    withCredentials([string(credentialsId: 'nexus_password', variable: 'NEXUS_PWD')]) {
                         sh '''
+                           set +x
                            docker login -u admin -p $NEXUS_PWD registry.wildwidewest.xyz
                         '''
                     }
