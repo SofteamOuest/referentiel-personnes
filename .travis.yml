@@ -6,7 +6,8 @@ jdk:
 sudo: false
 
 script:
-  - ./referentiel-personnes-back/gradlew clean test
+  - cd ./referentiel-personnes-back
+  - ./gradlew clean test
 
 cache:
   directories:
