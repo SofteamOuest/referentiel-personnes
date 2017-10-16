@@ -50,8 +50,10 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
                     sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
 
                     withCredentials([string(credentialsId: 'nexus_password', variable: 'NEXUS_PWD')]) {
-                        sh 'docker login -u admin -p $NEXUS_PWD registry.wildwidewest.xyz'
+                         echo "My password is '${NEXUS_PWD}'!"
                     }
+
+                    sh 'docker login -u admin -p softeam44 registry.wildwidewest.xyz'
 
                     sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
                 }
