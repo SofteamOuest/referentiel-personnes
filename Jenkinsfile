@@ -24,10 +24,6 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
         def branch = env.JOB_NAME.replaceFirst('.+/', '');
 
-        environment {
-            NEXUS_PWD = credentials('nexus_password')
-        }
-
         stage('checkout sources'){
             checkout scm;
         }
@@ -53,11 +49,10 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
                     // le registry est insecure (pas de https)
                     sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
 
-                    withCredentials([string(credentialsId: 'nexus_password', variable: 'nexus_password')]) {
+                    withCredentials([string(credentialsId: 'nexus_password', variable: '$NEXUS_PWD')]) {
                         sh '''
-                           docker login -u admin -p $nexus_password registry.wildwidewest.xyz
+                           docker login -u admin -p $NEXUS_PWD registry.wildwidewest.xyz
                         '''
-
                     }
 
                     sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
