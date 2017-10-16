@@ -35,7 +35,7 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
         container('gradle') {
 
                 stage('build sources'){
-                    sh 'cd referentiel-personnes-back; gradle clean install'
+                    sh 'cd referentiel-personnes-back; gradle clean build'
                 }
         }
 
