@@ -22,12 +22,18 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
     node('meltingpoc-build-pod') {
 
+        def branch = env.JOB_NAME.replaceFirst('.+/', '');
+
         environment {
             NEXUS_PWD = credentials('nexus_password')
         }
 
         // checkout des sources
-        git url: 'https://github.com/SofteamOuest/referentiel-personnes-api.git'
+        // git url: 'https://github.com/SofteamOuest/referentiel-personnes-api.git'
+
+        stage('checkout sources'){
+            checkout scm;
+        }
 
         container('gradle') {
 
