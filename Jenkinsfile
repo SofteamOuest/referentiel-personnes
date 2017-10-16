@@ -28,9 +28,6 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
             NEXUS_PWD = credentials('nexus_password')
         }
 
-        // checkout des sources
-        // git url: 'https://github.com/SofteamOuest/referentiel-personnes-api.git'
-
         stage('checkout sources'){
             checkout scm;
         }
