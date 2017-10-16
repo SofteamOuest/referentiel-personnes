@@ -22,17 +22,20 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
     node('meltingpoc-build-pod') {
 
+        def branch = env.JOB_NAME.replaceFirst('.+/', '');
+
         environment {
             NEXUS_PWD = credentials('nexus_password')
         }
 
-        // checkout des sources
-        git url: 'https://github.com/SofteamOuest/referentiel-personnes-api.git'
+        stage('checkout sources'){
+            checkout scm;
+        }
 
         container('gradle') {
 
                 stage('build sources'){
-                    sh 'cd referentiel-personnes-back; gradle clean install'
+                    sh 'cd referentiel-personnes-back; gradle clean build'
                 }
         }
 
@@ -40,6 +43,8 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
                 stage('build docker image'){
 
+
+                    sh 'ls -la referentiel-personnes-back/build/libs'
 
                     sh 'cd referentiel-personnes-back; docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc .'
 
@@ -58,10 +63,10 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
             stage('deploy'){
 
-                sh 'kubectl --namespace=development delete ing meltingpoc'
-                sh 'kubectl --namespace=development delete svc meltingpoc'
-                sh 'kubectl --namespace=development delete deployment meltingpoc '
-                sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f kubernetes/meltingpoc.yml'
+                sh 'kubectl delete ing meltingpoc'
+                sh 'kubectl delete svc meltingpoc'
+                sh 'kubectl delete deployment meltingpoc'
+                sh 'kubectl apply -f kubernetes/meltingpoc.yml'
 
             }
         }

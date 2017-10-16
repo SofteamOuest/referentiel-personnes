@@ -17,14 +17,16 @@ buildscript {
 }
 
 apply plugin: 'kotlin'
-apply plugin: 'maven'
+//apply plugin: 'maven'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 jar.archiveName = 'referentiel-personnes-api.jar'
 
 repositories {
     mavenCentral()
 }
+
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
