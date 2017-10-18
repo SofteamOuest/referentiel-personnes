@@ -42,7 +42,7 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
                     sh 'ls -la build/libs'
 
-                    sh 'docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc .'
+                    sh 'docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes .'
 
                     sh 'mkdir /etc/docker'
 
@@ -55,7 +55,7 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
                          sh "docker login -u admin -p ${NEXUS_PWD} registry.wildwidewest.xyz"
                     }
 
-                    sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
+                    sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes'
                 }
         }
 
@@ -63,7 +63,6 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
             stage('deploy'){
 
-                sh 'kubectl delete ing meltingpoc'
                 sh 'kubectl delete svc meltingpoc'
                 sh 'kubectl delete deployment meltingpoc'
                 sh 'kubectl apply -f src/main/kubernetes/meltingpoc.yml'

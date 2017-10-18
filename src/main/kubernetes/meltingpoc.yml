@@ -1,7 +1,7 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: meltingpoc
+  name: meltingpoc-api-personnes
 spec:
   replicas: 1
   template:
@@ -15,7 +15,7 @@ spec:
         ports:
         - containerPort: 27017
       - name: meltingpoc-server
-        image: registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc
+        image: registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes
         ports:
         - containerPort: 8080
       imagePullSecrets:
@@ -24,27 +24,11 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: meltingpoc
+  name: meltingpoc-api-personnes
 spec:
   selector:
-    app: meltingpoc
+    app: meltingpoc-api-personnes
   ports:
     - protocol: TCP
       port: 80
       targetPort: 8080
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: meltingpoc
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.frontend.rule.type: PathPrefixStrip
-spec:
-  rules:
-  - host: meltingpoc.k8.wildwidewest.xyz
-    http:
-      paths:
-      - backend:
-          serviceName: meltingpoc
-          servicePort: 80
