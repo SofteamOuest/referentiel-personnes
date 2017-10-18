@@ -13,4 +13,5 @@ fabric.properties
 gradle
 .gradle
 gradlew*
+build/
 
