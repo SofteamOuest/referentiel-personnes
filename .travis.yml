@@ -6,8 +6,6 @@ jdk:
 sudo: false
 
 script:
-  - ls
-  - ./gradlew clean test
 
 cache:
   directories:
