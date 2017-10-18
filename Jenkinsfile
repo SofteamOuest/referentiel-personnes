@@ -31,7 +31,7 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
         container('gradle') {
 
                 stage('build sources'){
-                    sh 'cd referentiel-personnes-back; gradle clean build'
+                    sh 'gradle clean build'
                 }
         }
 
@@ -40,9 +40,9 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
                 stage('build docker image'){
 
 
-                    sh 'ls -la referentiel-personnes-back/build/libs'
+                    sh 'ls -la build/libs'
 
-                    sh 'cd referentiel-personnes-back; docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc .'
+                    sh 'docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc .'
 
                     sh 'mkdir /etc/docker'
 
@@ -66,7 +66,7 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
                 sh 'kubectl delete ing meltingpoc'
                 sh 'kubectl delete svc meltingpoc'
                 sh 'kubectl delete deployment meltingpoc'
-                sh 'kubectl apply -f kubernetes/meltingpoc.yml'
+                sh 'kubectl apply -f src/main/kubernetes/meltingpoc.yml'
 
             }
         }
