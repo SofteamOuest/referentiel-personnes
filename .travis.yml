@@ -6,7 +6,7 @@ jdk:
 sudo: false
 
 script:
-  - cd ./referentiel-personnes-api
+  - ls
   - ./gradlew clean test
 
 cache:
