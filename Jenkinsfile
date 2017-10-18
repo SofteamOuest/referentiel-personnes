@@ -63,8 +63,8 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
             stage('deploy'){
 
-                sh 'kubectl delete svc meltingpoc'
-                sh 'kubectl delete deployment meltingpoc'
+                //sh 'kubectl delete svc meltingpoc'
+                //sh 'kubectl delete deployment meltingpoc'
                 sh 'kubectl apply -f src/main/kubernetes/meltingpoc.yml'
 
             }
