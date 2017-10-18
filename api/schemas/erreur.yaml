@@ -1,8 +1,0 @@
-Erreur:
-  description: |
-    Une erreur
-  properties:
-    code:
-      type: integer
-    libelle:
-      type: string
