@@ -7,7 +7,7 @@ spec:
   template:
     metadata:
      labels:
-        app: meltingpoc
+        app: meltingpoc-api-personnes
     spec:
       containers:
       - name: meltingpoc-mongo
