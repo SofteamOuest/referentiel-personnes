@@ -24,6 +24,17 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
         def branch = env.JOB_NAME.replaceFirst('.+/', '');
 
+        properties([
+                buildDiscarder(
+                    logRotator(
+                        artifactDaysToKeepStr: '1',
+                        artifactNumToKeepStr: '1',
+                        daysToKeepStr: '3',
+                        numToKeepStr: '3'
+                    )
+                )
+            ])
+
         stage('checkout sources'){
             checkout scm;
         }
