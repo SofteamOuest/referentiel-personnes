@@ -5,8 +5,10 @@ jdk:
 
 sudo: false
 
+before_install:
+ - chmod +x gradlew
+
 script:
-  - cd ./referentiel-personnes-back
   - ./gradlew clean test
 
 cache:

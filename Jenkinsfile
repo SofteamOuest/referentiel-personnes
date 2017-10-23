@@ -24,6 +24,17 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
         def branch = env.JOB_NAME.replaceFirst('.+/', '');
 
+        properties([
+                buildDiscarder(
+                    logRotator(
+                        artifactDaysToKeepStr: '1',
+                        artifactNumToKeepStr: '1',
+                        daysToKeepStr: '3',
+                        numToKeepStr: '3'
+                    )
+                )
+            ])
+
         stage('checkout sources'){
             checkout scm;
         }
@@ -42,7 +53,7 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
                     sh 'ls -la build/libs'
 
-                    sh 'docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc .'
+                    sh 'docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes .'
 
                     sh 'mkdir /etc/docker'
 
@@ -55,7 +66,7 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
                          sh "docker login -u admin -p ${NEXUS_PWD} registry.wildwidewest.xyz"
                     }
 
-                    sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc'
+                    sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes'
                 }
         }
 
@@ -63,10 +74,9 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
             stage('deploy'){
 
-                sh 'kubectl delete ing meltingpoc'
-                sh 'kubectl delete svc meltingpoc'
-                sh 'kubectl delete deployment meltingpoc'
-                sh 'kubectl apply -f src/main/kubernetes/meltingpoc.yml'
+                sh 'kubectl delete svc meltingpoc-api-personnes'
+                sh 'kubectl delete deployment meltingpoc-api-personnes'
+                sh 'kubectl create -f src/main/kubernetes/meltingpoc-api-personnes.yml'
 
             }
         }
