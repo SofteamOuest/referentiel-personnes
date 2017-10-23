@@ -17,6 +17,9 @@ class PersonnesCommandService constructor(
         return personneRepository.save(personne)
     }
 
+    fun list() : List<Personne> {
+        return personneRepository.findAll();
+    }
     fun update(personne: Personne): Personne {
         val oldPersonne: Personne? = personneRepository.findOne(personne.id)
         return if (oldPersonne != null) {

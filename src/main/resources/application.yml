@@ -7,3 +7,5 @@ server:
 spring:
   application:
     name: REFERENTIEL-PERSONNES-BACK
+    data:
+      mongodb.database: maBase
