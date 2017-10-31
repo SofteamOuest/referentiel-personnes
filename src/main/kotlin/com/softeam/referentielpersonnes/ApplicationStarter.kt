@@ -1,4 +1,4 @@
-package com.softeam.referentielpersonnes.back
+package com.softeam.referentielpersonnes
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication

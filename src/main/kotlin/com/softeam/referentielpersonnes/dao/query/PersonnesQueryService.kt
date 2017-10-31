@@ -1,7 +1,7 @@
-package com.softeam.referentielpersonnes.back.query
+package com.softeam.referentielpersonnes.dao.query
 
-import com.softeam.referentielpersonnes.back.domain.Personne
-import com.softeam.referentielpersonnes.back.repository.PersonneRepository
+import com.softeam.referentielpersonnes.dao.domain.Personne
+import com.softeam.referentielpersonnes.dao.repository.PersonneRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service

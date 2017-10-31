@@ -9,3 +9,8 @@ spring:
     name: REFERENTIEL-PERSONNES-BACK
     data:
       mongodb.database: maBase
+dropbox:
+  app:
+    key: 08kwvph0jd5y1ad
+    secret: 08kwvph0jd5y1ad
+  #token: 8s63Ewks0oAAAAAAAAAAB-jVr6Z8XFu-udGNWp3qr7eY37KFGen29jt6vVQTKSmb

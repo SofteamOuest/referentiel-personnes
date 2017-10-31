@@ -1,4 +1,4 @@
-package com.softeam.referentielpersonnes.back.configuration
+package com.softeam.referentielpersonnes.configuration
 
 import com.mongodb.Mongo
 import com.mongodb.MongoClient

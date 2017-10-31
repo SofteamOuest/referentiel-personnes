@@ -1,7 +1,6 @@
-package com.softeam.referentielpersonnes.back.command
+package com.softeam.referentielpersonnes.dao.repository
 
-import com.softeam.referentielpersonnes.back.domain.Personne
-import com.softeam.referentielpersonnes.back.repository.PersonneRepository
+import com.softeam.referentielpersonnes.dao.domain.Personne
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 

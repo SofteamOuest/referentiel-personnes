@@ -1,6 +1,7 @@
-package com.softeam.referentielpersonnes.back.command
+package com.softeam.referentielpersonnes.resource
 
-import com.softeam.referentielpersonnes.back.domain.Personne
+import com.softeam.referentielpersonnes.dao.repository.PersonnesCommandService
+import com.softeam.referentielpersonnes.dao.domain.Personne
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType

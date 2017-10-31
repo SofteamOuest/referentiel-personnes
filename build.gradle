@@ -7,6 +7,7 @@ buildscript {
     ext.graphkool_version = '0.1.0'
     ext.jongo_version = '1.3.0'
     ext.mongeeze_version = '0.9.6'
+    ext.dropbox_version = '3.0.5';
 
     repositories {
         mavenCentral()
@@ -37,6 +38,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-data-mongodb"
     compile "org.mongeez:mongeez:$mongeeze_version"
     compile "org.jongo:jongo:$jongo_version"
+    compile "com.dropbox.core:dropbox-core-sdk:$dropbox_version"
 }
 
 compileKotlin {
