@@ -28,7 +28,7 @@ open class MongoConfiguration : AbstractMongoConfiguration() {
     @Bean
     @Throws(Exception::class)
     open fun mongoClient(): MongoClient {
-        val mongoClient = MongoClient("localhost")
+        val mongoClient = MongoClient("127.0.0.1")
         return mongoClient
     }
 
