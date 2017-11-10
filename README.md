@@ -7,8 +7,6 @@
 - Démarrer container docker mongodb. mongo:latest
 - Lancer ApplicationStarter avec l'option suivante: -Ddropbox.token=8s63Ewks0oAAAAAAAAAAB-jVr6Z8XFu-udGNWp3qr7eY37KFGen29jt6vVQTKSmb
 
-
-
 ## Base de données
 
 Mongeez gère la montée en version de la base mongodb.
