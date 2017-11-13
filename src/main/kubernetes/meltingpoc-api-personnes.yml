@@ -18,12 +18,12 @@ spec:
         image: registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes
         ports:
         - containerPort: 8080
-      env:
-      - name: dropbox.token
-        valueFrom:
-          secretKeyRef:
-            name: dropbox
-            key: token
+        env:
+        - name: dropbox.token
+          valueFrom:
+            secretKeyRef:
+              name: dropbox
+              key: token
       imagePullSecrets:
       - name: regsecret
 ---
