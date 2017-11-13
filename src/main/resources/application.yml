@@ -1,5 +1,7 @@
 logging.level:
-  com.softeam.referentielpersonnes.back: INFO
+  com.softeam.referentielpersonnes.back: DEBUG
+
+logging.file: /var/log/containers/application.log
 
 server:
   port: 8080
