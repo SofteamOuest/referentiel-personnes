@@ -1,5 +1,5 @@
 #!groovy
-import java.text.SimpleDateFormat
+import java.text.*
 
 // pod utilisé pour la compilation du projet
 podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
@@ -35,6 +35,8 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
                 )
             ])
 
+        def now = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())
+
         stage('checkout sources'){
             checkout scm;
         }
@@ -42,7 +44,9 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
         container('gradle') {
 
                 stage('build sources'){
+
                     sh 'gradle clean build'
+
                 }
         }
 
@@ -51,9 +55,7 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
                 stage('build docker image'){
 
 
-                    sh 'ls -la build/libs'
-
-                    sh 'docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes .'
+                    sh "docker build -t registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes:$now ."
 
                     sh 'mkdir /etc/docker'
 
@@ -61,12 +63,12 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
                     sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
 
                     withCredentials([string(credentialsId: 'nexus_password', variable: 'NEXUS_PWD')]) {
-                         echo "My password is '${NEXUS_PWD}'!"
 
                          sh "docker login -u admin -p ${NEXUS_PWD} registry.wildwidewest.xyz"
                     }
 
-                    sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes'
+                    sh "docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes:$now"
+
                 }
         }
 
@@ -74,9 +76,14 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
 
             stage('deploy'){
 
-                sh 'kubectl delete svc meltingpoc-api-personnes || :'
+                /* sh 'kubectl delete svc meltingpoc-api-personnes || :'
                 sh 'kubectl delete deployment meltingpoc-api-personnes || :'
-                sh 'kubectl create -f src/main/kubernetes/meltingpoc-api-personnes.yml || :'
+                sh 'kubectl create -f src/main/kubernetes/meltingpoc-api-personnes.yml || :' */
+
+
+                build job: "referentiel-personnes-api-run/master",
+                  wait: false,
+                  parameters: [[$class: 'StringParameterValue', name: 'image', value: "$now"]]
 
             }
         }
