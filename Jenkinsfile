@@ -1,4 +1,3 @@
-#!groovy
 import java.text.*
 
 // pod utilisé pour la compilation du projet
@@ -75,10 +74,6 @@ podTemplate(label: 'meltingpoc-build-pod', nodeSelector: 'medium', containers: [
         container('kubectl') {
 
             stage('deploy'){
-
-                /* sh 'kubectl delete svc meltingpoc-api-personnes || :'
-                sh 'kubectl delete deployment meltingpoc-api-personnes || :'
-                sh 'kubectl create -f src/main/kubernetes/meltingpoc-api-personnes.yml || :' */
 
 
                 build job: "referentiel-personnes-api-run/master",
