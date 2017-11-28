@@ -1,7 +1,6 @@
-package com.softeam.referentielpersonnes.resource
+package com.softeam.referentielpersonnes.command
 
 
-import com.softeam.referentielpersonnes.dao.dropbox.PhotosService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType

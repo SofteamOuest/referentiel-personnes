@@ -1,7 +1,6 @@
-package com.softeam.referentielpersonnes.resource
+package com.softeam.referentielpersonnes.query
 
-import com.softeam.referentielpersonnes.dao.domain.Personne
-import com.softeam.referentielpersonnes.dao.query.PersonnesQueryService
+import com.softeam.referentielpersonnes.domain.Personne
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Pageable

@@ -1,4 +1,4 @@
-package com.softeam.referentielpersonnes.dao.domain
+package com.softeam.referentielpersonnes.domain
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document

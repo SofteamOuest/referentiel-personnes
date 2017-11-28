@@ -1,6 +1,6 @@
-package com.softeam.referentielpersonnes.dao.repository
+package com.softeam.referentielpersonnes.repository
 
-import com.softeam.referentielpersonnes.dao.domain.Personne
+import com.softeam.referentielpersonnes.domain.Personne
 import org.springframework.data.mongodb.repository.MongoRepository
 
 interface PersonneRepository : MongoRepository<Personne, String>

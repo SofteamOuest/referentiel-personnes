@@ -1,9 +1,9 @@
-package com.softeam.referentielpersonnes.dao.dropbox
+package com.softeam.referentielpersonnes.command
 
 import com.dropbox.core.v2.DbxClientV2Base
-import com.softeam.referentielpersonnes.dao.domain.Personne
+import com.softeam.referentielpersonnes.domain.Personne
 import org.springframework.stereotype.Service
-import com.softeam.referentielpersonnes.dao.query.PersonnesQueryService
+import com.softeam.referentielpersonnes.query.PersonnesQueryService
 import org.springframework.web.multipart.MultipartFile
 
 
