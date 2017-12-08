@@ -25,7 +25,7 @@ où v1_1 doit être remplacé par la version du script et correspond au préfixe
 
 ##Service upload photo 
 Compte Dropbox : 
-Se connecter avec l'adresse mail softeamsofteam@gmail.com/wwwest987
+Se connecter
 Le service /photos/{id_personne} permet d'uploader une photo pour uen peronne donnée.
 Le service doit être appelé avec une personne dont la date de naissance est valorisée.
 
