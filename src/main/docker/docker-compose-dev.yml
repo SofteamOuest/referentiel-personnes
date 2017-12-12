@@ -1,6 +1,6 @@
 version: '2'
 services:
   referentiel-personnes-mongodb:
-    image: mongo:3.5.13
+    image: mongo:latest
     ports:
       - "27017:27017"
