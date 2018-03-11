@@ -37,6 +37,10 @@ dependencies {
     compile "com.dropbox.core:dropbox-core-sdk:$dropbox_version"
     compile "org.jongo:jongo:$jongo_version"
     compile "org.mongeez:mongeez:$mongeeze_version"
+
+    compile 'org.slf4j:slf4j-api'
+    compile 'ch.qos.logback:logback-classic'
+    compile 'ch.qos.logback:logback-core'
 }
 
 compileKotlin {
