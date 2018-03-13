@@ -15,21 +15,21 @@ class PersonnesQueryResource @Autowired constructor(
     private val logger = LoggerFactory.getLogger(PersonnesQueryResource::class.java)
 
     @RequestMapping(
-            value = "/personnes/{id}",
+            value = ["/personnes/{id}"],
             method = arrayOf(RequestMethod.GET),
             produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
     private fun get(@PathVariable id: String): Personne? {
-        logger.debug("Getting Personne #$id")
+        logger.info("Getting Personne #$id")
         return personnesQueryService.get(id)
     }
 
     @RequestMapping(
-            value = "/personnes",
+            value = ["/personnes"],
             method = arrayOf(RequestMethod.GET),
             produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
     @ResponseBody
     private fun list(pageable: Pageable): Iterable<Personne> {
-        logger.debug("Getting all Personnes, $pageable.toString()")
+        logger.info("Getting all Personnes, $pageable.toString()")
         val list = personnesQueryService.list(pageable)
         logger.debug("List of Personnes $list.content.toString()")
         return list.content
