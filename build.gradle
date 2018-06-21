@@ -41,6 +41,10 @@ dependencies {
     compile 'org.slf4j:slf4j-api'
     compile 'ch.qos.logback:logback-classic'
     compile 'ch.qos.logback:logback-core'
+
+    compile('org.springframework.boot:spring-boot-starter')
+    compile('org.springframework.kafka:spring-kafka')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 compileKotlin {
