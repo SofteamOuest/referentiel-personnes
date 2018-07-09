@@ -18,5 +18,15 @@ class PersonnesQueryService constructor(
     fun list(pageable: Pageable): Page<Personne> {
         return personneRepository.findAll(pageable)
     }
+        fun create(personne: Personne): Personne {
+        return personneRepository.save(personne)
+    }
+    
+        fun delete(id: String) {
+        val personne: Personne? = personneRepository.findOne(id)
+        if (personne != null) {
+            personneRepository.delete(id)
+        }
+    }
 
 }
