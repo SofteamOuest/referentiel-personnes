@@ -14,6 +14,7 @@ data class Personne(
         var photo: String? = null,
         var mail_pro: String? = null,
         var mail_perso: String? = null,
+        var role: String? = null,
         var tel_pro: String? = null,
         var tel_perso: String? = null,
         var poste: String? = null,
