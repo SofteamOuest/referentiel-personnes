@@ -8,7 +8,9 @@ spring:
   application:
     name: REFERENTIEL-PERSONNES-BACK
     data:
-      mongodb.database: maBase
+      mongodb:
+        database: db
+        url: api-personnes-mongo
 dropbox:
   app:
     key: 08kwvph0jd5y1ad
