@@ -6,7 +6,7 @@ services:
     ports:
     - "27017:27017"
 
-  api-personnes-server:
+  api-personnes:
     build: .
     environment:
       dropbox.token: 8s63Ewks0oAAAAAAAAAAB-jVr6Z8XFu-udGNWp3qr7eY37KFGen29jt6vVQTKSmb
