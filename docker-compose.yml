@@ -11,8 +11,8 @@ services:
     environment:
       dropbox.token: 8s63Ewks0oAAAAAAAAAAB-jVr6Z8XFu-udGNWp3qr7eY37KFGen29jt6vVQTKSmb
     extra_hosts:
-      - "api.dropboxapi.com:162.125.69.7"
+    - "api.dropboxapi.com:162.125.69.7"
     ports:
-    - "8080:8080"
+    - "8080:80"
     depends_on:
-      - api-personnes-mongo
+    - api-personnes-mongo

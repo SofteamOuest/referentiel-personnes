@@ -2,7 +2,7 @@ logging.level:
   com.softeam.referentielpersonnes.back: DEBUG
 
 server:
-  port: 8080
+  port: 80
 
 spring:
   application:
