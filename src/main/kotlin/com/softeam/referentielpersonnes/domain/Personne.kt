@@ -14,10 +14,12 @@ data class Personne(
         var photo: String? = null,
         var mail_pro: String? = null,
         var mail_perso: String? = null,
-        var role: String? = null,
+        var role_nom: String? = null,
         var tel_pro: String? = null,
         var tel_perso: String? = null,
         var poste: String? = null,
+        var mail_manager: String? = null,
+        var mail_commercial: String? = null,
         var date_debut_contrat: String? = null,
         var date_visite_medical: String? = null,
         var periode_essai_valide: Boolean? = null
