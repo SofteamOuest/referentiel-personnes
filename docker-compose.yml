@@ -1,12 +1,12 @@
 version: '3.2'
 services:
 
-  api-personnes-mongo:
+  referentiel-personnes-api-mongo:
     image: mongo:latest
     ports:
     - "27017:27017"
 
-  api-personnes:
+  referentiel-personnes-api:
     build: .
     environment:
       dropbox.token: 8s63Ewks0oAAAAAAAAAAB-jVr6Z8XFu-udGNWp3qr7eY37KFGen29jt6vVQTKSmb
