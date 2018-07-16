@@ -45,7 +45,7 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-pod', nodeSelector: 'medium
 
                 stage('build sources'){
 
-                    sh 'gradle clean build sonarqube -Dsonar.host.url=http://sonarqube-sonarqube:9000 -Dsonar.java.binaries=target -DskipTests'
+                    sh 'gradle clean build '
 
                 }
         }
