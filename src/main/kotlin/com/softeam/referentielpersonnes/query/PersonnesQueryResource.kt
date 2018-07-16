@@ -40,6 +40,11 @@ class PersonnesQueryResource @Autowired constructor(
                     logger.info("ajouterPersonne new $personne.toString()")
                     return personnesQueryService.create(personne)
     }
+        @PostMapping(path = arrayOf("/personnes/update"), produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
+    fun modifierPersonne(@RequestBody personne: Personne): Personne {
+                    logger.info("modifierPersonne new $personne.toString()")
+                    return personnesQueryService.update(personne)
+    }
 	@RequestMapping(value = ["/personnes/delete/{id}"], method = arrayOf(RequestMethod.DELETE))
    fun supprimerPersonneById(@PathVariable id: String)  {
            logger.debug("C de Personnes $id")

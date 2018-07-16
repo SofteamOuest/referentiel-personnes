@@ -22,6 +22,15 @@ class PersonnesQueryService constructor(
         return personneRepository.save(personne)
     }
     
+        fun update(personne: Personne): Personne {
+        val oldPersonne: Personne? = personneRepository.findOne(personne.id)
+        return if (oldPersonne != null) {
+            personneRepository.save(personne)
+        } else {
+            personne
+        }
+    }
+    
         fun delete(id: String) {
         val personne: Personne? = personneRepository.findOne(id)
         if (personne != null) {
