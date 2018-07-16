@@ -2,13 +2,15 @@ logging.level:
   com.softeam.referentielpersonnes.back: DEBUG
 
 server:
-  port: 8080
+  port: 80
 
 spring:
   application:
     name: REFERENTIEL-PERSONNES-BACK
     data:
-      mongodb.database: maBase
+      mongodb:
+        database: db
+        url: referentiel-personnes-api-mongo
 dropbox:
   app:
     key: 08kwvph0jd5y1ad

@@ -45,7 +45,7 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-pod', nodeSelector: 'medium
 
                 stage('build sources'){
 
-                    sh 'gradle clean build'
+                    sh 'gradle clean build '
 
                 }
         }
