@@ -8,6 +8,7 @@ services:
 
   referentiel-personnes-api:
     build: .
+    image: "registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes:${tag}"
     environment:
       dropbox.token: 8s63Ewks0oAAAAAAAAAAB-jVr6Z8XFu-udGNWp3qr7eY37KFGen29jt6vVQTKSmb
     extra_hosts:

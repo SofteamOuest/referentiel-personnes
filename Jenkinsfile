@@ -54,9 +54,6 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-pod', nodeSelector: 'medium
 
                 stage('build docker image'){
 
-
-                    sh "docker build -t registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes:$now ."
-
                     sh 'mkdir /etc/docker'
 
                     // le registry est insecure (pas de https)
@@ -67,8 +64,9 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-pod', nodeSelector: 'medium
                          sh "docker login -u admin -p ${NEXUS_PWD} registry.k8.wildwidewest.xyz"
                     }
 
-                    sh "docker push registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-personnes:$now"
+                    sh "tag=$now docker-compose build"
 
+                    sh "tag=$now docker-compose push"
                 }
         }
 
@@ -76,11 +74,9 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-pod', nodeSelector: 'medium
 
             stage('deploy'){
 
-
-                build job: "/SofteamOuest/referentiel-personnes-api-run/master",
-                  wait: false,
-                  parameters: [[$class: 'StringParameterValue', name: 'image', value: "$now"]]
-
+                build job: '/SOFTEAMOUEST/chart-run/master', parameters: [
+                    string(name: 'image', value: "$now"), 
+                    string(name: 'chart', value: "referentiel-personnes-api")], wait: false
             }
         }
     }
