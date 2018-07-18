@@ -11,7 +11,7 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-pod', nodeSelector: 'medium
         containerTemplate(name: 'gradle', image: 'elkouhen/gradle-docker', privileged: true, ttyEnabled: true, command: 'cat'),
 
         // un conteneur pour construire les images docker
-        containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
+        containerTemplate(name: 'docker', image: 'tmaier/docker-compose', command: 'cat', ttyEnabled: true),
 
         // un conteneur pour déployer les services kubernetes
         containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl', command: 'cat', ttyEnabled: true)],
@@ -38,15 +38,14 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-pod', nodeSelector: 'medium
         def now = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())
 
         stage('checkout sources'){
-            checkout scm;
+            checkout scm
         }
 
         container('gradle') {
 
                 stage('build sources'){
 
-                    sh 'gradle clean build '
-
+                    sh 'gradle clean build'
                 }
         }
 
@@ -72,11 +71,12 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-pod', nodeSelector: 'medium
 
         container('kubectl') {
 
-            stage('deploy'){
+            stage('deploy') {
 
-                build job: '/SOFTEAMOUEST/chart-run/master', parameters: [
-                    string(name: 'image', value: "$now"), 
-                    string(name: 'chart', value: "referentiel-personnes-api")], wait: false
+                build job: "/SofteamOuest/chart-run/master",
+                        wait: false,
+                        parameters: [string(name: 'image', value: "$now"),
+                                        string(name: 'chart', value: "referentiel-personnes-api")]
             }
         }
     }
