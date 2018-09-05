@@ -44,7 +44,6 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-pod', nodeSelector: 'medium
         container('gradle') {
 
                 stage('build sources'){
-
                     sh 'gradle clean build'
                 }
         }
@@ -76,7 +75,8 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-pod', nodeSelector: 'medium
                 build job: "/SofteamOuest/chart-run/master",
                         wait: false,
                         parameters: [string(name: 'image', value: "$now"),
-                                        string(name: 'chart', value: "referentiel-personnes-api")]
+                                        string(name: 'chart', value: "referentiel-personnes-api"),
+                                        string(name: 'env', value: branch)]
             }
         }
     }

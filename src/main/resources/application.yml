@@ -10,7 +10,7 @@ spring:
     data:
       mongodb:
         database: db
-        url: referentiel-personnes-api-mongo
+        url: ${mongodb_service:referentiel-personnes-api-mongo}
 dropbox:
   app:
     key: 08kwvph0jd5y1ad
