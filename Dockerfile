@@ -1,4 +1,4 @@
-FROM java:9-jdk
+FROM java:8
 
 MAINTAINER mehdi.elkouhen@softeam.fr
 
