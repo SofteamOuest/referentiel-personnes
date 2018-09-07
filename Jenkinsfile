@@ -26,46 +26,46 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-pod', nodeSelector: 'medium
 
         properties([
                 buildDiscarder(
-                    logRotator(
-                        artifactDaysToKeepStr: '1',
-                        artifactNumToKeepStr: '1',
-                        daysToKeepStr: '3',
-                        numToKeepStr: '3'
-                    )
+                        logRotator(
+                                artifactDaysToKeepStr: '1',
+                                artifactNumToKeepStr: '1',
+                                daysToKeepStr: '3',
+                                numToKeepStr: '3'
+                        )
                 )
-            ])
+        ])
 
         def now = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())
 
-        stage('checkout sources'){
+        stage('checkout sources') {
             checkout scm
         }
 
         container('gradle') {
 
-                stage('build sources'){
-                    sh 'gradle clean build'
-                }
+            stage('build sources') {
+                sh 'gradle clean build'
+            }
         }
 
         container('docker') {
 
-                stage('build docker image'){
+            stage('build docker image') {
 
-                    sh 'mkdir /etc/docker'
+                sh 'mkdir /etc/docker'
 
-                    // le registry est insecure (pas de https)
-                    sh 'echo {"insecure-registries" : ["registry.k8.wildwidewest.xyz"]} > /etc/docker/daemon.json'
+                // le registry est insecure (pas de https)
+                sh 'echo {"insecure-registries" : ["registry.k8.wildwidewest.xyz"]} > /etc/docker/daemon.json'
 
-                    withCredentials([string(credentialsId: 'nexus_password', variable: 'NEXUS_PWD')]) {
+                withCredentials([usernamePassword(credentialsId: 'nexus_user', usernameVariable: 'username', passwordVariable: 'password')]) {
 
-                         sh "docker login -u admin -p ${NEXUS_PWD} registry.k8.wildwidewest.xyz"
-                    }
-
-                    sh "tag=$now docker-compose build"
-
-                    sh "tag=$now docker-compose push"
+                    sh "docker login -u ${username} -p ${password} registry.k8.wildwidewest.xyz"
                 }
+
+                sh "tag=$now docker-compose build"
+
+                sh "tag=$now docker-compose push"
+            }
         }
 
         container('kubectl') {
@@ -75,7 +75,7 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-pod', nodeSelector: 'medium
                 build job: "/SofteamOuest/chart-run/master",
                         wait: false,
                         parameters: [string(name: 'image', value: "$now"),
-                                        string(name: 'chart', value: "referentiel-personnes-api")]
+                                     string(name: 'chart', value: "referentiel-personnes-api")]
             }
         }
     }
