@@ -37,20 +37,20 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-pod', nodeSelector: 'medium
 
         def now = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())
 
-        stage('checkout sources') {
+        stage('CHECKOUT') {
             checkout scm
         }
 
         container('gradle') {
 
-            stage('build sources') {
+            stage('BUILD SOURCES') {
                 sh 'gradle clean build sonarqube'
             }
         }
 
         container('docker') {
 
-            stage('build docker image') {
+            stage('BUILD DOCKER IMAGE') {
 
                 sh 'mkdir /etc/docker'
 
@@ -70,7 +70,7 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-pod', nodeSelector: 'medium
 
         container('kubectl') {
 
-            stage('deploy') {
+            stage('RUN') {
 
                 build job: "/SofteamOuest/chart-run/master",
                         wait: false,
