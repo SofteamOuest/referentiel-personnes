@@ -44,7 +44,9 @@ podTemplate(label: 'meltingpoc-referentiel-personnes-pod', nodeSelector: 'medium
         container('gradle') {
 
             stage('BUILD SOURCES') {
-                sh 'gradle clean build sonarqube'
+                withCredentials([string(credentialsId: 'sonarqube_token', variable: 'token')]) {
+                    sh 'gradle clean build -Dsonar.login=${token}'
+                }
             }
         }
 
